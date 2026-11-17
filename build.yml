@@ -1,0 +1,38 @@
+name: Build Debug APK
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: src
+      - name: Unzip project
+        run: unzip -q src/gemquest-rewards-updated.zip -d proj
+      - name: Use my google-services.json and debug.keystore if uploaded
+        run: |
+          [ -f src/google-services.json ] && cp src/google-services.json proj/app/google-services.json || true
+          [ -f src/debug.keystore ] && cp src/debug.keystore proj/debug.keystore || true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Debug keystore
+        working-directory: proj
+        run: |
+          [ -f debug.keystore ] || keytool -genkeypair -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          keytool -list -v -keystore debug.keystore -storepass android | grep -E "SHA1|SHA256"
+      - name: Gradle version
+        id: gv
+        working-directory: proj
+        run: echo "v=$(sed -n 's/.*gradle-\([0-9.]*\)-.*/\1/p' gradle/wrapper/gradle-wrapper.properties)" >> $GITHUB_OUTPUT
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: ${{ steps.gv.outputs.v }}
+      - name: Build
+        working-directory: proj
+        run: gradle assembleDebug --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: proj/app/build/outputs/apk/debug/app-debug.apk

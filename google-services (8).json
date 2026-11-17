@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "619517033026",
+    "firebase_url": "https://diyan-website-default-rtdb.firebaseio.com",
+    "project_id": "diyan-website",
+    "storage_bucket": "diyan-website.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619517033026:android:014de17d6c6b9f095d0bdb",
+        "android_client_info": {
+          "package_name": "com.aistudio.questrewards.jqeqdg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619517033026-u1dq9o7d52ll2u9s14ligtojgs7jcpcb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aistudio.questrewards.jqeqdg",
+            "certificate_hash": "2dbcebfdd077e520f0bd974b77d54e2b557d85fc"
+          }
+        },
+        {
+          "client_id": "619517033026-trhjmoovs7ncchi38cdc1u0lrqnmu8um.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7WebEkL9LdhGRAFkgRQAxblX9d62Tjaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619517033026-trhjmoovs7ncchi38cdc1u0lrqnmu8um.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
